@@ -8,6 +8,7 @@ import {
   Delete,
   HttpException,
   HttpStatus,
+  ParseIntPipe,
 } from '@nestjs/common';
 
 import { UsersService } from '../services/users.service';
@@ -35,11 +36,12 @@ export class UsersController {
     }
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   throw new HttpException(`User ${id} not found`, HttpStatus.NOT_FOUND);
-  //   //return this.usersService.findOne(+id);
-  // }
+  @Get(':id')
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    //throw new HttpException(`User ${id} not found`, HttpStatus.NOT_FOUND);
+    //console.log(typeof id);
+    return this.usersService.findOne(id);
+  }
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
