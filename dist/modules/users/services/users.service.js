@@ -6,23 +6,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.HttpExceptionFilter = void 0;
+exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
-let HttpExceptionFilter = class HttpExceptionFilter {
-    catch(exception, host) {
-        const ctx = host.switchToHttp();
-        const response = ctx.getResponse();
-        const request = ctx.getRequest();
-        const status = exception.getStatus();
-        response.status(status).json({
-            statusCode: status,
-            timestamp: new Date().toISOString(),
-            path: request.url,
+let UsersService = class UsersService {
+    create(createUserDto) {
+        return 'This action adds a new user';
+    }
+    findAll() {
+        throw new common_1.BadRequestException('Something bad happened', {
+            cause: new Error(),
+            description: 'Some error description',
         });
     }
+    findOne(id) {
+        return 'This action find a user';
+    }
+    update(id, updateUserDto) {
+        return `This action updates a #${id} user`;
+    }
+    remove(id) {
+        return `This action removes a #${id} user`;
+    }
 };
-HttpExceptionFilter = __decorate([
-    (0, common_1.Catch)(common_1.HttpException)
-], HttpExceptionFilter);
-exports.HttpExceptionFilter = HttpExceptionFilter;
-//# sourceMappingURL=http-exception.filter.js.map
+UsersService = __decorate([
+    (0, common_1.Injectable)()
+], UsersService);
+exports.UsersService = UsersService;
+//# sourceMappingURL=users.service.js.map

@@ -6,16 +6,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LoggerMiddleware = void 0;
+exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
-let LoggerMiddleware = class LoggerMiddleware {
-    use(req, res, next) {
-        console.log(`New request at ${new Date().toISOString()}`);
-        next();
+const forbidden_exception_1 = require("../../../common/exceptions/forbidden.exception");
+let UsersService = class UsersService {
+    create(createUserDto) {
+        return 'This action adds a new user';
+    }
+    findAll() {
+        throw new forbidden_exception_1.ForbiddenException();
+    }
+    findOne(id) {
+        return 'This action find a user';
+    }
+    update(id, updateUserDto) {
+        return `This action updates a #${id} user`;
+    }
+    remove(id) {
+        return `This action removes a #${id} user`;
     }
 };
-LoggerMiddleware = __decorate([
+UsersService = __decorate([
     (0, common_1.Injectable)()
-], LoggerMiddleware);
-exports.LoggerMiddleware = LoggerMiddleware;
-//# sourceMappingURL=logger.middleware.js.map
+], UsersService);
+exports.UsersService = UsersService;
+//# sourceMappingURL=users.service.js.map

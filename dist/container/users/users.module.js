@@ -6,23 +6,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.HttpExceptionFilter = void 0;
+exports.UsersModule = void 0;
 const common_1 = require("@nestjs/common");
-let HttpExceptionFilter = class HttpExceptionFilter {
-    catch(exception, host) {
-        const ctx = host.switchToHttp();
-        const response = ctx.getResponse();
-        const request = ctx.getRequest();
-        const status = exception.getStatus();
-        response.status(status).json({
-            statusCode: status,
-            timestamp: new Date().toISOString(),
-            path: request.url,
-        });
-    }
+const users_service_1 = require("./services/users.service");
+const users_controller_1 = require("./controllers/users.controller");
+let UsersModule = class UsersModule {
 };
-HttpExceptionFilter = __decorate([
-    (0, common_1.Catch)(common_1.HttpException)
-], HttpExceptionFilter);
-exports.HttpExceptionFilter = HttpExceptionFilter;
-//# sourceMappingURL=http-exception.filter.js.map
+UsersModule = __decorate([
+    (0, common_1.Module)({
+        controllers: [users_controller_1.UsersController],
+        providers: [users_service_1.UsersService],
+        exports: [users_service_1.UsersService],
+    })
+], UsersModule);
+exports.UsersModule = UsersModule;
+//# sourceMappingURL=users.module.js.map

@@ -10,11 +10,10 @@ import { APP_FILTER } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { LoggerMiddleware } from './common/middlewares/logger.middleware';
-import { UsersModule } from './users/users.module';
-import { AffiliatesModule } from './affiliates/affiliates.module';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
-  imports: [UsersModule, AffiliatesModule],
+  imports: [UsersModule],
   controllers: [AppController],
   providers: [
     AppService,

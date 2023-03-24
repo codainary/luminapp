@@ -13,8 +13,7 @@ const core_1 = require("@nestjs/core");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const logger_middleware_1 = require("./common/middlewares/logger.middleware");
-const users_module_1 = require("./users/users.module");
-const affiliates_module_1 = require("./affiliates/affiliates.module");
+const users_module_1 = require("./modules/users/users.module");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer
@@ -25,7 +24,7 @@ let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [users_module_1.UsersModule, affiliates_module_1.AffiliatesModule],
+        imports: [users_module_1.UsersModule],
         controllers: [app_controller_1.AppController],
         providers: [
             app_service_1.AppService,
