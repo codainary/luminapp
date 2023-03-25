@@ -17,17 +17,16 @@ __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateUserDto.prototype, "name", void 0);
+], CreateUserDto.prototype, "usuario", void 0);
 __decorate([
-    (0, class_validator_1.IsInt)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsPositive)(),
-    __metadata("design:type", Number)
-], CreateUserDto.prototype, "age", void 0);
-__decorate([
-    (0, class_validator_1.IsEmail)(),
+    (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateUserDto.prototype, "email", void 0);
+], CreateUserDto.prototype, "contrasena", void 0);
+__decorate([
+    (0, class_validator_1.IsBoolean)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Boolean)
+], CreateUserDto.prototype, "activo", void 0);
 exports.CreateUserDto = CreateUserDto;
 //# sourceMappingURL=create-user.dto.js.map

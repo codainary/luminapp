@@ -1,22 +1,15 @@
-import {
-  IsEmail,
-  IsInt,
-  IsNotEmpty,
-  IsPositive,
-  IsString,
-} from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
-  readonly name: string;
+  readonly usuario: string;
 
-  @IsInt()
+  @IsString()
   @IsNotEmpty()
-  @IsPositive()
-  readonly age: number;
+  readonly contrasena: string;
 
-  @IsEmail()
+  @IsBoolean()
   @IsNotEmpty()
-  readonly email: string;
+  readonly activo: boolean;
 }
