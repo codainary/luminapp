@@ -16,6 +16,7 @@ let HttpExceptionFilter = class HttpExceptionFilter {
         const status = exception.getStatus();
         const contex = exception.getResponse();
         response.status(status).json({
+            status,
             timestamp: new Date().toISOString(),
             path: request.url,
             contex,

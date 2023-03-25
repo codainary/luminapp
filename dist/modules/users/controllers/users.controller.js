@@ -14,6 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersController = void 0;
 const common_1 = require("@nestjs/common");
+const validation_pipe_1 = require("../../../common/pipes/validation.pipe");
 const users_service_1 = require("../services/users.service");
 const forbidden_exception_1 = require("../../../common/exceptions/forbidden.exception");
 let UsersController = class UsersController {
@@ -28,8 +29,13 @@ let UsersController = class UsersController {
             throw new forbidden_exception_1.ForbiddenException();
         }
     }
-    findOne(id) {
-        return this.usersService.findOne(id);
+    async findOne(id) {
+        try {
+            await this.usersService.findOne(id);
+        }
+        catch (error) {
+            throw new common_1.HttpException(`Someting was wrong`, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 };
 __decorate([
@@ -40,10 +46,10 @@ __decorate([
 ], UsersController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(0, (0, common_1.Param)('id', validation_pipe_1.ValidationPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], UsersController.prototype, "findOne", null);
 UsersController = __decorate([
     (0, common_1.Controller)('users'),

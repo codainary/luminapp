@@ -3,5 +3,5 @@ export declare class UsersController {
     private readonly usersService;
     constructor(usersService: UsersService);
     findAll(): Promise<void>;
-    findOne(id: number): string;
+    findOne(id: number): Promise<void>;
 }

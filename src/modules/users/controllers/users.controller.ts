@@ -11,6 +11,7 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 
+import { ValidationPipe } from '../../../common/pipes/validation.pipe';
 import { UsersService } from '../services/users.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
@@ -37,10 +38,15 @@ export class UsersController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    //throw new HttpException(`User ${id} not found`, HttpStatus.NOT_FOUND);
-    //console.log(typeof id);
-    return this.usersService.findOne(id);
+  async findOne(@Param('id', ValidationPipe) id: number) {
+    try {
+      await this.usersService.findOne(id);
+    } catch (error) {
+      throw new HttpException(
+        `Someting was wrong`,
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
   // @Patch(':id')
