@@ -1,7 +1,7 @@
-import { CreateUserDto } from '../dto/create-user.dto';
-import { UpdateUserDto } from '../dto/update-user.dto';
+import { CreateUserDto } from '../dtos/create-user.dto';
+import { UpdateUserDto } from '../dtos/update-user.dto';
 export declare class UsersService {
-    create(createUserDto: CreateUserDto): string;
+    create(payload: CreateUserDto): string;
     findAll(): void;
     findOne(id: number): string;
     update(id: number, updateUserDto: UpdateUserDto): string;

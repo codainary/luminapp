@@ -14,19 +14,25 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersController = void 0;
 const common_1 = require("@nestjs/common");
-const validation_pipe_1 = require("../../../common/pipes/validation.pipe");
 const users_service_1 = require("../services/users.service");
-const forbidden_exception_1 = require("../../../common/exceptions/forbidden.exception");
+const create_user_dto_1 = require("../dtos/create-user.dto");
 let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
+    }
+    createUser(payload) {
+        try {
+            return this.usersService.create(payload);
+        }
+        catch (error) {
+            throw new common_1.InternalServerErrorException();
+        }
     }
     async findAll() {
         try {
             await this.usersService.findAll();
         }
         catch (error) {
-            throw new forbidden_exception_1.ForbiddenException();
         }
     }
     async findOne(id) {
@@ -34,10 +40,17 @@ let UsersController = class UsersController {
             await this.usersService.findOne(id);
         }
         catch (error) {
-            throw new common_1.HttpException(`Someting was wrong`, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new common_1.InternalServerErrorException();
         }
     }
 };
+__decorate([
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto]),
+    __metadata("design:returntype", void 0)
+], UsersController.prototype, "createUser", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
@@ -46,7 +59,7 @@ __decorate([
 ], UsersController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id', validation_pipe_1.ValidationPipe)),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)

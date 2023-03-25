@@ -15,11 +15,19 @@ export class HttpExceptionFilter implements ExceptionFilter<HttpException> {
     const status = exception.getStatus();
     const contex = exception.getResponse();
 
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const now = new Date();
+    const options = { timeZone: timezone };
+    const formattedTime = now.toLocaleTimeString([], options);
+
     response.status(status).json({
-      status,
-      timestamp: new Date().toISOString(),
+      // status,
       path: request.url,
       contex,
+      timestamp: {
+        time: formattedTime,
+        zone: timezone,
+      },
     });
   }
 }

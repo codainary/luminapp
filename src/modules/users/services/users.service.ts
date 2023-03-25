@@ -5,12 +5,12 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { ForbiddenException } from 'src/common/exceptions/forbidden.exception';
-import { CreateUserDto } from '../dto/create-user.dto';
-import { UpdateUserDto } from '../dto/update-user.dto';
+import { CreateUserDto } from '../dtos/create-user.dto';
+import { UpdateUserDto } from '../dtos/update-user.dto';
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
+  create(payload: CreateUserDto) {
     return 'This action adds a new user';
   }
 

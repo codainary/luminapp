@@ -9,43 +9,43 @@ import {
   HttpException,
   HttpStatus,
   ParseIntPipe,
+  UsePipes,
+  InternalServerErrorException,
 } from '@nestjs/common';
 
-import { ValidationPipe } from '../../../common/pipes/validation.pipe';
 import { UsersService } from '../services/users.service';
-import { CreateUserDto } from '../dto/create-user.dto';
-import { UpdateUserDto } from '../dto/update-user.dto';
-//import { HttpExceptionFilter } from 'src/common/filters/http-exception.filter';
-import { ForbiddenException } from 'src/common/exceptions/forbidden.exception';
+import { CreateUserDto } from '../dtos/create-user.dto';
+import { UpdateUserDto } from '../dtos/update-user.dto';
 
 @Controller('users')
 //@UseFilters(new HttpExceptionFilter())
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  // @Post()
-  // create(@Body() createUserDto: CreateUserDto) {
-  //   throw new ForbiddenException();
-  // }
+  @Post()
+  createUser(@Body() payload: CreateUserDto) {
+    try {
+      return this.usersService.create(payload);
+    } catch (error) {
+      throw new InternalServerErrorException();
+    }
+  }
 
   @Get()
   async findAll() {
     try {
       await this.usersService.findAll();
     } catch (error) {
-      throw new ForbiddenException();
+      //
     }
   }
 
   @Get(':id')
-  async findOne(@Param('id', ValidationPipe) id: number) {
+  async findOne(@Param('id', ParseIntPipe) id: number) {
     try {
       await this.usersService.findOne(id);
     } catch (error) {
-      throw new HttpException(
-        `Someting was wrong`,
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+      throw new InternalServerErrorException();
     }
   }
 
