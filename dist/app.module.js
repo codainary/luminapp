@@ -7,24 +7,39 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
-const http_exception_filter_1 = require("./common/filters/http-exception.filter");
+const Joi = require("joi");
 const common_1 = require("@nestjs/common");
 const core_1 = require("@nestjs/core");
+const http_exception_filter_1 = require("./common/filters/http-exception.filter");
+const configuration_1 = require("./config/configuration");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const logger_middleware_1 = require("./common/middlewares/logger.middleware");
 const users_module_1 = require("./modules/users/users.module");
+const config_1 = require("@nestjs/config");
+const enviroments_1 = require("./config/enviroments");
 let AppModule = class AppModule {
     configure(consumer) {
-        consumer
-            .apply(logger_middleware_1.LoggerMiddleware)
-            .exclude({ path: 'users/:id', method: common_1.RequestMethod.GET })
-            .forRoutes('*');
+        consumer.apply(logger_middleware_1.LoggerMiddleware).forRoutes('*');
     }
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [users_module_1.UsersModule],
+        imports: [
+            users_module_1.UsersModule,
+            config_1.ConfigModule.forRoot({
+                load: [configuration_1.default],
+                isGlobal: true,
+                envFilePath: enviroments_1.enviroments[process.env.NODE_ENV] || '.dev.env',
+                validationSchema: Joi.object({
+                    DATABASE_NAME: Joi.string().required(),
+                    DATABASE_USERNAME: Joi.string().required(),
+                    DATABASE_PASSWORD: Joi.string().required(),
+                    DATABASE_HOST: Joi.string().required(),
+                    DATABASE_PORT: Joi.number().required(),
+                }),
+            }),
+        ],
         controllers: [app_controller_1.AppController],
         providers: [
             app_service_1.AppService,
