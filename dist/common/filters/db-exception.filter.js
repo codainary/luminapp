@@ -20,7 +20,6 @@ let DatabaseExceptionFilter = class DatabaseExceptionFilter extends core_1.BaseE
                 parameters: exception.parameters,
             },
         };
-        const errorResponse = new common_1.HttpException(response, response.statusCode);
         const ctx = host.switchToHttp();
         const res = ctx.getResponse();
         const req = ctx.getRequest();

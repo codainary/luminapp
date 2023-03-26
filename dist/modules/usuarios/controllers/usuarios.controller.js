@@ -22,7 +22,12 @@ let UsuariosController = class UsuariosController {
         this.usuariosService = usuariosService;
     }
     create(createUsuarioDto) {
-        return this.usuariosService.create(createUsuarioDto);
+        try {
+            return this.usuariosService.create(createUsuarioDto);
+        }
+        catch (error) {
+            throw new common_1.InternalServerErrorException();
+        }
     }
     findAll() {
         return this.usuariosService.findAll();

@@ -1,10 +1,4 @@
-import {
-  Catch,
-  ExceptionFilter,
-  ArgumentsHost,
-  HttpException,
-  HttpStatus,
-} from '@nestjs/common';
+import { Catch, ArgumentsHost, HttpStatus } from '@nestjs/common';
 import { BaseExceptionFilter } from '@nestjs/core';
 import { QueryFailedError } from 'typeorm';
 
@@ -21,7 +15,7 @@ export class DatabaseExceptionFilter extends BaseExceptionFilter {
       },
     };
 
-    const errorResponse = new HttpException(response, response.statusCode);
+    //const errorResponse = new HttpException(response, response.statusCode);
 
     const ctx = host.switchToHttp();
     const res = ctx.getResponse();

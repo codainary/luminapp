@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  InternalServerErrorException,
 } from '@nestjs/common';
 import { UsuariosService } from '../services/usuarios.service';
 import { CreateUsuarioDto } from '../dto/create-usuario.dto';
@@ -17,7 +18,11 @@ export class UsuariosController {
 
   @Post()
   create(@Body() createUsuarioDto: CreateUsuarioDto) {
-    return this.usuariosService.create(createUsuarioDto);
+    try {
+      return this.usuariosService.create(createUsuarioDto);
+    } catch (error) {
+      throw new InternalServerErrorException();
+    }
   }
 
   @Get()
