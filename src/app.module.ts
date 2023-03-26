@@ -12,6 +12,7 @@ import { ConfigModule } from '@nestjs/config';
 import { enviroments } from './config/enviroments';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsuariosModule } from './modules/usuarios/usuarios.module';
+import { DatabaseExceptionFilter } from './common/filters/db-exception.filter';
 
 @Module({
   imports: [
@@ -45,6 +46,10 @@ import { UsuariosModule } from './modules/usuarios/usuarios.module';
     {
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: DatabaseExceptionFilter,
     },
   ],
 })

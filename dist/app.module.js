@@ -20,6 +20,7 @@ const config_1 = require("@nestjs/config");
 const enviroments_1 = require("./config/enviroments");
 const typeorm_1 = require("@nestjs/typeorm");
 const usuarios_module_1 = require("./modules/usuarios/usuarios.module");
+const db_exception_filter_1 = require("./common/filters/db-exception.filter");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer.apply(logger_middleware_1.LoggerMiddleware).forRoutes('*');
@@ -58,6 +59,10 @@ AppModule = __decorate([
             {
                 provide: core_1.APP_FILTER,
                 useClass: http_exception_filter_1.HttpExceptionFilter,
+            },
+            {
+                provide: core_1.APP_FILTER,
+                useClass: db_exception_filter_1.DatabaseExceptionFilter,
             },
         ],
     })
