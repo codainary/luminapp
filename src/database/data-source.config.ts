@@ -9,6 +9,7 @@ export const dataSourceOptions: DataSourceOptions = {
   database: 'test',
   entities: ['dist/**/*.entity.js'],
   migrations: ['dist/database/migrations/*.js'],
+  
 };
 
 const dataSource = new DataSource(dataSourceOptions);
