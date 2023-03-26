@@ -13,7 +13,7 @@ import { UsersModule } from './modules/users/users.module';
 import { enviroments } from './config/enviroments';
 import { UsuariosModule } from './modules/usuarios/usuarios.module';
 import { DatabaseExceptionFilter } from './common/filters/db-exception.filter';
-import { dataSourceOptions } from './database/config/data-source.config';
+import { dataSourceOptions } from './database/data-source.config';
 
 @Module({
   imports: [

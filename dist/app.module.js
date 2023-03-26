@@ -21,7 +21,7 @@ const users_module_1 = require("./modules/users/users.module");
 const enviroments_1 = require("./config/enviroments");
 const usuarios_module_1 = require("./modules/usuarios/usuarios.module");
 const db_exception_filter_1 = require("./common/filters/db-exception.filter");
-const ormconfig_1 = require("./database/config/ormconfig");
+const data_source_config_1 = require("./database/data-source.config");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer.apply(logger_middleware_1.LoggerMiddleware).forRoutes('*');
@@ -43,7 +43,7 @@ AppModule = __decorate([
                     DATABASE_PORT: Joi.number().required(),
                 }),
             }),
-            typeorm_1.TypeOrmModule.forRoot(ormconfig_1.dataSourceOptions),
+            typeorm_1.TypeOrmModule.forRoot(data_source_config_1.dataSourceOptions),
             usuarios_module_1.UsuariosModule,
         ],
         controllers: [app_controller_1.AppController],

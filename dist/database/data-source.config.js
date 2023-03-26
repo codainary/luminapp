@@ -14,4 +14,4 @@ exports.dataSourceOptions = {
 };
 const dataSource = new typeorm_1.DataSource(exports.dataSourceOptions);
 exports.default = dataSource;
-//# sourceMappingURL=ormconfig.js.map
+//# sourceMappingURL=data-source.config.js.map
