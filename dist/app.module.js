@@ -18,6 +18,8 @@ const logger_middleware_1 = require("./common/middlewares/logger.middleware");
 const users_module_1 = require("./modules/users/users.module");
 const config_1 = require("@nestjs/config");
 const enviroments_1 = require("./config/enviroments");
+const typeorm_1 = require("@nestjs/typeorm");
+const usuarios_module_1 = require("./modules/usuarios/usuarios.module");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer.apply(logger_middleware_1.LoggerMiddleware).forRoutes('*');
@@ -39,6 +41,16 @@ AppModule = __decorate([
                     DATABASE_PORT: Joi.number().required(),
                 }),
             }),
+            typeorm_1.TypeOrmModule.forRoot({
+                type: 'postgres',
+                database: process.env.DATABASE_NAME,
+                username: process.env.DATABASE_USERNAME,
+                password: process.env.DATABASE_PASSWORD,
+                port: parseInt(process.env.DATABASE_PORT, 10),
+                entities: ['dist/**/*.entity.js'],
+                synchronize: true,
+            }),
+            usuarios_module_1.UsuariosModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [

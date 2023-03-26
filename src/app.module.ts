@@ -10,6 +10,8 @@ import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { UsersModule } from './modules/users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { enviroments } from './config/enviroments';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsuariosModule } from './modules/usuarios/usuarios.module';
 
 @Module({
   imports: [
@@ -26,6 +28,16 @@ import { enviroments } from './config/enviroments';
         DATABASE_PORT: Joi.number().required(),
       }),
     }),
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      database: process.env.DATABASE_NAME,
+      username: process.env.DATABASE_USERNAME,
+      password: process.env.DATABASE_PASSWORD,
+      port: parseInt(process.env.DATABASE_PORT, 10),
+      entities: ['dist/**/*.entity.js'],
+      synchronize: true,
+    }),
+    UsuariosModule,
   ],
   controllers: [AppController],
   providers: [
