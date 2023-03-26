@@ -28,7 +28,6 @@ __decorate([
         type: 'character varying',
         length: 255,
         nullable: false,
-        unique: true,
     }),
     __metadata("design:type", String)
 ], Usuario.prototype, "contrasena", void 0);
@@ -38,7 +37,7 @@ __decorate([
         default: false,
     }),
     __metadata("design:type", Boolean)
-], Usuario.prototype, "active", void 0);
+], Usuario.prototype, "activo", void 0);
 Usuario = __decorate([
     (0, typeorm_1.Entity)({ name: 'usuarios' })
 ], Usuario);

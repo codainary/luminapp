@@ -16,7 +16,6 @@ export class Usuario extends AbstractEntity {
     type: 'character varying',
     length: 255,
     nullable: false,
-    unique: true,
   })
   contrasena: string;
 
@@ -24,5 +23,5 @@ export class Usuario extends AbstractEntity {
     type: 'boolean',
     default: false,
   })
-  active: boolean;
+  activo: boolean;
 }

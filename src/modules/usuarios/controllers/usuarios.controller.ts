@@ -8,6 +8,7 @@ import {
   Delete,
   InternalServerErrorException,
 } from '@nestjs/common';
+
 import { UsuariosService } from '../services/usuarios.service';
 import { CreateUsuarioDto } from '../dto/create-usuario.dto';
 import { UpdateUsuarioDto } from '../dto/update-usuario.dto';
@@ -21,13 +22,17 @@ export class UsuariosController {
     try {
       return this.usuariosService.create(createUsuarioDto);
     } catch (error) {
-      throw new InternalServerErrorException();
+      throw new InternalServerErrorException(error);
     }
   }
 
   @Get()
   findAll() {
-    return this.usuariosService.findAll();
+    try {
+      return this.usuariosService.findAll();
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
   }
 
   @Get(':id')

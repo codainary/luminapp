@@ -10,17 +10,18 @@ exports.AppModule = void 0;
 const Joi = require("joi");
 const common_1 = require("@nestjs/common");
 const core_1 = require("@nestjs/core");
+const config_1 = require("@nestjs/config");
+const typeorm_1 = require("@nestjs/typeorm");
 const http_exception_filter_1 = require("./common/filters/http-exception.filter");
 const configuration_1 = require("./config/configuration");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const logger_middleware_1 = require("./common/middlewares/logger.middleware");
 const users_module_1 = require("./modules/users/users.module");
-const config_1 = require("@nestjs/config");
 const enviroments_1 = require("./config/enviroments");
-const typeorm_1 = require("@nestjs/typeorm");
 const usuarios_module_1 = require("./modules/usuarios/usuarios.module");
 const db_exception_filter_1 = require("./common/filters/db-exception.filter");
+const ormconfig_1 = require("./database/config/ormconfig");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer.apply(logger_middleware_1.LoggerMiddleware).forRoutes('*');
@@ -42,15 +43,7 @@ AppModule = __decorate([
                     DATABASE_PORT: Joi.number().required(),
                 }),
             }),
-            typeorm_1.TypeOrmModule.forRoot({
-                type: 'postgres',
-                database: process.env.DATABASE_NAME,
-                username: process.env.DATABASE_USERNAME,
-                password: process.env.DATABASE_PASSWORD,
-                port: parseInt(process.env.DATABASE_PORT, 10),
-                entities: ['dist/**/*.entity.js'],
-                synchronize: true,
-            }),
+            typeorm_1.TypeOrmModule.forRoot(ormconfig_1.dataSourceOptions),
             usuarios_module_1.UsuariosModule,
         ],
         controllers: [app_controller_1.AppController],

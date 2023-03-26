@@ -1,6 +1,8 @@
 import * as Joi from 'joi';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import configuration from './config/configuration';
@@ -8,11 +10,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { UsersModule } from './modules/users/users.module';
-import { ConfigModule } from '@nestjs/config';
+
 import { enviroments } from './config/enviroments';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsuariosModule } from './modules/usuarios/usuarios.module';
 import { DatabaseExceptionFilter } from './common/filters/db-exception.filter';
+import { dataSourceOptions } from './database/config/ormconfig';
 
 @Module({
   imports: [
@@ -29,15 +31,7 @@ import { DatabaseExceptionFilter } from './common/filters/db-exception.filter';
         DATABASE_PORT: Joi.number().required(),
       }),
     }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      database: process.env.DATABASE_NAME,
-      username: process.env.DATABASE_USERNAME,
-      password: process.env.DATABASE_PASSWORD,
-      port: parseInt(process.env.DATABASE_PORT, 10),
-      entities: ['dist/**/*.entity.js'],
-      synchronize: true,
-    }),
+    TypeOrmModule.forRoot(dataSourceOptions),
     UsuariosModule,
   ],
   controllers: [AppController],

@@ -26,11 +26,16 @@ let UsuariosController = class UsuariosController {
             return this.usuariosService.create(createUsuarioDto);
         }
         catch (error) {
-            throw new common_1.InternalServerErrorException();
+            throw new common_1.InternalServerErrorException(error);
         }
     }
     findAll() {
-        return this.usuariosService.findAll();
+        try {
+            return this.usuariosService.findAll();
+        }
+        catch (error) {
+            throw new common_1.InternalServerErrorException(error);
+        }
     }
     findOne(id) {
         return this.usuariosService.findOne(+id);
