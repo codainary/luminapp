@@ -9,15 +9,14 @@ import configuration from './config/configuration';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { LoggerMiddleware } from './common/middlewares/logger.middleware';
-import { UsersModule } from './modules/users/users.module';
 import { enviroments } from './config/enviroments';
 import { UsuariosModule } from './modules/usuarios/usuarios.module';
 import { DatabaseExceptionFilter } from './common/filters/db-exception.filter';
 import { dataSourceOptions } from './database/data-source.config';
+import { ContribuyentesModule } from './modules/contribuyentes/contribuyentes.module';
 
 @Module({
   imports: [
-    UsersModule,
     ConfigModule.forRoot({
       load: [configuration],
       isGlobal: true,
@@ -32,6 +31,7 @@ import { dataSourceOptions } from './database/data-source.config';
     }),
     TypeOrmModule.forRoot(dataSourceOptions),
     UsuariosModule,
+    ContribuyentesModule,
   ],
   controllers: [AppController],
   providers: [
