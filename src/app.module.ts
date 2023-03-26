@@ -10,11 +10,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { UsersModule } from './modules/users/users.module';
-
 import { enviroments } from './config/enviroments';
 import { UsuariosModule } from './modules/usuarios/usuarios.module';
 import { DatabaseExceptionFilter } from './common/filters/db-exception.filter';
-import { dataSourceOptions } from './database/config/ormconfig';
+import { dataSourceOptions } from './database/config/data-source.config';
 
 @Module({
   imports: [
