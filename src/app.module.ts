@@ -5,7 +5,6 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
-import configuration from './config/configuration';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { LoggerMiddleware } from './common/middlewares/logger.middleware';
@@ -18,7 +17,6 @@ import { ContribuyentesModule } from './modules/contribuyentes/contribuyentes.mo
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [configuration],
       isGlobal: true,
       envFilePath: enviroments[process.env.NODE_ENV] || '.dev.env',
       validationSchema: Joi.object({

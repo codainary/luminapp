@@ -1,16 +1,10 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { ConfigType } from '@nestjs/config';
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
-import configuration from './config/configuration';
 @Injectable()
 export class AppService {
-  constructor(
-    @Inject(configuration.KEY)
-    private readonly config: ConfigType<typeof configuration>,
-  ) {}
-
+  constructor(private configService: ConfigService) {}
   getHello(): string {
-    console.log(this.config.database.password);
-    return 'Hello World!';
+    return `<h1>Hello World!</h1>`;
   }
 }

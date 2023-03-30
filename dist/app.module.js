@@ -13,7 +13,6 @@ const core_1 = require("@nestjs/core");
 const config_1 = require("@nestjs/config");
 const typeorm_1 = require("@nestjs/typeorm");
 const http_exception_filter_1 = require("./common/filters/http-exception.filter");
-const configuration_1 = require("./config/configuration");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const logger_middleware_1 = require("./common/middlewares/logger.middleware");
@@ -31,7 +30,6 @@ AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             config_1.ConfigModule.forRoot({
-                load: [configuration_1.default],
                 isGlobal: true,
                 envFilePath: enviroments_1.enviroments[process.env.NODE_ENV] || '.dev.env',
                 validationSchema: Joi.object({

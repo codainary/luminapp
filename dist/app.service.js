@@ -8,26 +8,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppService = void 0;
 const common_1 = require("@nestjs/common");
-const configuration_1 = require("./config/configuration");
+const config_1 = require("@nestjs/config");
 let AppService = class AppService {
-    constructor(config) {
-        this.config = config;
+    constructor(configService) {
+        this.configService = configService;
     }
     getHello() {
-        console.log(this.config.database.password);
-        return 'Hello World!';
+        return `<h1>Hello World!</h1>`;
     }
 };
 AppService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, common_1.Inject)(configuration_1.default.KEY)),
-    __metadata("design:paramtypes", [void 0])
+    __metadata("design:paramtypes", [config_1.ConfigService])
 ], AppService);
 exports.AppService = AppService;
 //# sourceMappingURL=app.service.js.map
