@@ -12,14 +12,6 @@ insert_final_newline = true
 [*.md]
 trim_trailing_whitespace = false
 
-[*.js]
-# NestJS style guide: https://docs.nestjs.com/contributing/style-guide
-indent_size = 2
-indent_style = space
-quote_type = single
-semi = true
-max_line_length = 120
-
 [*.ts]
 # NestJS style guide: https://docs.nestjs.com/contributing/style-guide
 indent_size = 2
