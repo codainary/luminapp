@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Usuario = void 0;
 const typeorm_1 = require("typeorm");
 const abstract_entity_1 = require("../../../common/abstract.entity");
+const contribuyente_entity_1 = require("../../contribuyentes/entities/contribuyente.entity");
 let Usuario = class Usuario extends abstract_entity_1.AbstractEntity {
 };
 __decorate([
@@ -38,6 +39,12 @@ __decorate([
     }),
     __metadata("design:type", Boolean)
 ], Usuario.prototype, "activo", void 0);
+__decorate([
+    (0, typeorm_1.OneToOne)(() => contribuyente_entity_1.Contribuyente, (contribuyente) => contribuyente.usuario, {
+        nullable: true,
+    }),
+    __metadata("design:type", contribuyente_entity_1.Contribuyente)
+], Usuario.prototype, "contribuyente", void 0);
 Usuario = __decorate([
     (0, typeorm_1.Entity)({ name: 'usuarios' })
 ], Usuario);

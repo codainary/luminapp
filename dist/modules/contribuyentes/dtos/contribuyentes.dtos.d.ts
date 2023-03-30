@@ -7,6 +7,7 @@ export declare class CreateContribuyenteDto {
     readonly telefono: string;
     readonly correo: string;
     readonly direccion: string;
+    readonly usuarioId: number;
 }
 declare const UpdateContribuyenteDto_base: import("@nestjs/mapped-types").MappedType<Partial<CreateContribuyenteDto>>;
 export declare class UpdateContribuyenteDto extends UpdateContribuyenteDto_base {

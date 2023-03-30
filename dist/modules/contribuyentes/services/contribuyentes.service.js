@@ -11,25 +11,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ContribuyentesService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const contribuyente_entity_1 = require("../entities/contribuyente.entity");
+const usuarios_service_1 = require("./../../usuarios/services/usuarios.service");
 let ContribuyentesService = class ContribuyentesService {
-    constructor(contribuyentesRepo) {
+    constructor(contribuyentesRepo, usuariosServices) {
         this.contribuyentesRepo = contribuyentesRepo;
+        this.usuariosServices = usuariosServices;
     }
-    create(payload) {
-        const newSolicitante = this.contribuyentesRepo.create(payload);
-        return this.contribuyentesRepo.save(newSolicitante);
+    create(data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const newSolicitante = this.contribuyentesRepo.create(data);
+            if (data.usuarioId) {
+                const usuario = yield this.usuariosServices.findOne(data.usuarioId);
+                newSolicitante.usuario = usuario;
+            }
+            return this.contribuyentesRepo.save(newSolicitante);
+        });
     }
 };
 ContribuyentesService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(contribuyente_entity_1.Contribuyente)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        usuarios_service_1.UsuariosService])
 ], ContribuyentesService);
 exports.ContribuyentesService = ContribuyentesService;
 //# sourceMappingURL=contribuyentes.service.js.map

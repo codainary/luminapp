@@ -52,6 +52,11 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateContribuyenteDto.prototype, "direccion", void 0);
+__decorate([
+    (0, class_validator_1.IsPositive)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Number)
+], CreateContribuyenteDto.prototype, "usuarioId", void 0);
 exports.CreateContribuyenteDto = CreateContribuyenteDto;
 class UpdateContribuyenteDto extends (0, mapped_types_1.PartialType)(CreateContribuyenteDto) {
 }

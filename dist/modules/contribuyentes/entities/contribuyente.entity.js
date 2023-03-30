@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Contribuyente = void 0;
 const typeorm_1 = require("typeorm");
 const abstract_entity_1 = require("../../../common/abstract.entity");
+const usuario_entity_1 = require("../../usuarios/entities/usuario.entity");
 let Contribuyente = class Contribuyente extends abstract_entity_1.AbstractEntity {
 };
 __decorate([
@@ -78,6 +79,15 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], Contribuyente.prototype, "direccion", void 0);
+__decorate([
+    (0, typeorm_1.OneToOne)(() => usuario_entity_1.Usuario, (usuario) => usuario.contribuyente, {
+        nullable: true,
+        cascade: true,
+        onDelete: 'CASCADE',
+    }),
+    (0, typeorm_1.JoinColumn)({ name: 'id_usuario' }),
+    __metadata("design:type", usuario_entity_1.Usuario)
+], Contribuyente.prototype, "usuario", void 0);
 Contribuyente = __decorate([
     (0, typeorm_1.Entity)({ name: 'contribuyentes' })
 ], Contribuyente);

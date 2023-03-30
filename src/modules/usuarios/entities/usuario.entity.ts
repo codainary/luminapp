@@ -1,7 +1,7 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, OneToOne } from 'typeorm';
 
 import { AbstractEntity } from '../../../common/abstract.entity';
-
+import { Contribuyente } from '../../contribuyentes/entities/contribuyente.entity';
 @Entity({ name: 'usuarios' })
 export class Usuario extends AbstractEntity {
   @Column({
@@ -24,4 +24,9 @@ export class Usuario extends AbstractEntity {
     default: false,
   })
   activo: boolean;
+
+  @OneToOne(() => Contribuyente, (contribuyente) => contribuyente.usuario, {
+    nullable: true,
+  })
+  contribuyente: Contribuyente;
 }

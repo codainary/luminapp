@@ -27,29 +27,35 @@ const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const usuario_entity_1 = require("../entities/usuario.entity");
 let UsuariosService = class UsuariosService {
-    constructor(usuariosRepo) {
-        this.usuariosRepo = usuariosRepo;
+    constructor(usuarioRepo) {
+        this.usuarioRepo = usuarioRepo;
     }
     create(payload) {
-        const newUsuario = this.usuariosRepo.create(payload);
-        return this.usuariosRepo.save(newUsuario);
+        const newUsuario = this.usuarioRepo.create(payload);
+        return this.usuarioRepo.save(newUsuario);
     }
     findAll() {
-        return this.usuariosRepo.find();
+        return this.usuarioRepo.find();
     }
     findOne(id) {
-        return this.usuariosRepo.findOneBy({ id });
+        return __awaiter(this, void 0, void 0, function* () {
+            const usuario = yield this.usuarioRepo.findOneBy({ id });
+            if (!usuario) {
+                throw new common_1.NotFoundException(`Usuario #${id} no encontrado`);
+            }
+            return usuario;
+        });
     }
     update(id, changes) {
         return __awaiter(this, void 0, void 0, function* () {
             const usuario = yield this.findOne(id);
-            return this.usuariosRepo.save(Object.assign(Object.assign({}, usuario), { changes }));
+            return this.usuarioRepo.save(Object.assign(Object.assign({}, usuario), { changes }));
         });
     }
     remove(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const usuario = yield this.findOne(id);
-            return this.usuariosRepo.remove(usuario);
+            return this.usuarioRepo.remove(usuario);
         });
     }
 };

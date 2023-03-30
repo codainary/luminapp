@@ -1,4 +1,5 @@
 import { AbstractEntity } from '../../../common/abstract.entity';
+import { Usuario } from '../../usuarios/entities/usuario.entity';
 export declare class Contribuyente extends AbstractEntity {
     cedula: string;
     primerNombre: string;
@@ -8,4 +9,5 @@ export declare class Contribuyente extends AbstractEntity {
     telefono: string;
     correo: string;
     direccion: string;
+    usuario: Usuario;
 }
