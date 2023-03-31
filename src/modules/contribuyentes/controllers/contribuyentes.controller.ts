@@ -1,10 +1,5 @@
 import { ContribuyentesService } from './../services/contribuyentes.service';
-import {
-  Body,
-  Controller,
-  InternalServerErrorException,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, Get, InternalServerErrorException, Post } from '@nestjs/common';
 
 import { CreateContribuyenteDto } from '../dtos/contribuyentes.dtos';
 
@@ -17,6 +12,15 @@ export class ContribuyentesController {
       return this.contribuyentesService.create(payload);
     } catch (error) {
       throw new InternalServerErrorException();
+    }
+  }
+
+  @Get()
+  findAll() {
+    try {
+      return this.contribuyentesService.findAll();
+    } catch (error) {
+      throw new InternalServerErrorException(error);
     }
   }
 }

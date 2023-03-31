@@ -21,6 +21,7 @@ const usuarios_module_1 = require("./modules/usuarios/usuarios.module");
 const db_exception_filter_1 = require("./common/filters/db-exception.filter");
 const data_source_config_1 = require("./database/data-source.config");
 const contribuyentes_module_1 = require("./modules/contribuyentes/contribuyentes.module");
+const auth_module_1 = require("./modules/auth/auth.module");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer.apply(logger_middleware_1.LoggerMiddleware).forRoutes('*');
@@ -43,6 +44,7 @@ AppModule = __decorate([
             typeorm_1.TypeOrmModule.forRoot(data_source_config_1.dataSourceOptions),
             usuarios_module_1.UsuariosModule,
             contribuyentes_module_1.ContribuyentesModule,
+            auth_module_1.AuthModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [

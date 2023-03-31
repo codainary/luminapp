@@ -26,28 +26,35 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const contribuyente_entity_1 = require("../entities/contribuyente.entity");
-const usuarios_service_1 = require("./../../usuarios/services/usuarios.service");
 let ContribuyentesService = class ContribuyentesService {
-    constructor(contribuyentesRepo, usuariosServices) {
+    constructor(contribuyentesRepo) {
         this.contribuyentesRepo = contribuyentesRepo;
-        this.usuariosServices = usuariosServices;
+    }
+    findAll() {
+        return this.contribuyentesRepo.find({
+            relations: ['usuario'],
+        });
     }
     create(data) {
         return __awaiter(this, void 0, void 0, function* () {
             const newSolicitante = this.contribuyentesRepo.create(data);
-            if (data.usuarioId) {
-                const usuario = yield this.usuariosServices.findOne(data.usuarioId);
-                newSolicitante.usuario = usuario;
-            }
             return this.contribuyentesRepo.save(newSolicitante);
+        });
+    }
+    findOne(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const contribuyente = yield this.contribuyentesRepo.findOneBy({ id });
+            if (!contribuyente) {
+                throw new common_1.NotFoundException(`Contribuyente #${id} no encontrado`);
+            }
+            return contribuyente;
         });
     }
 };
 ContribuyentesService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(contribuyente_entity_1.Contribuyente)),
-    __metadata("design:paramtypes", [typeorm_2.Repository,
-        usuarios_service_1.UsuariosService])
+    __metadata("design:paramtypes", [typeorm_2.Repository])
 ], ContribuyentesService);
 exports.ContribuyentesService = ContribuyentesService;
 //# sourceMappingURL=contribuyentes.service.js.map

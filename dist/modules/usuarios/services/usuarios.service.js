@@ -26,16 +26,26 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const usuario_entity_1 = require("../entities/usuario.entity");
+const contribuyentes_service_1 = require("../../contribuyentes/services/contribuyentes.service");
 let UsuariosService = class UsuariosService {
-    constructor(usuarioRepo) {
+    constructor(usuarioRepo, contribuyentesServices) {
         this.usuarioRepo = usuarioRepo;
+        this.contribuyentesServices = contribuyentesServices;
     }
-    create(payload) {
-        const newUsuario = this.usuarioRepo.create(payload);
-        return this.usuarioRepo.save(newUsuario);
+    create(data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const newUsuario = this.usuarioRepo.create(data);
+            if (data.contribuyenteId) {
+                const contribuyente = yield this.contribuyentesServices.findOne(data.contribuyenteId);
+                newUsuario.contribuyente = contribuyente;
+            }
+            return this.usuarioRepo.save(newUsuario);
+        });
     }
     findAll() {
-        return this.usuarioRepo.find();
+        return this.usuarioRepo.find({
+            relations: ['contribuyente'],
+        });
     }
     findOne(id) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -58,11 +68,25 @@ let UsuariosService = class UsuariosService {
             return this.usuarioRepo.remove(usuario);
         });
     }
+    findOneByUsername(usuario) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const findUsuario = yield this.usuarioRepo.find({
+                where: {
+                    usuario,
+                },
+            });
+            if (!findUsuario) {
+                throw new common_1.NotFoundException(`Usuario no encontrado`);
+            }
+            return findUsuario;
+        });
+    }
 };
 UsuariosService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(usuario_entity_1.Usuario)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        contribuyentes_service_1.ContribuyentesService])
 ], UsuariosService);
 exports.UsuariosService = UsuariosService;
 //# sourceMappingURL=usuarios.service.js.map

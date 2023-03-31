@@ -7,7 +7,7 @@ import { ContribuyentesService } from './services/contribuyentes.service';
 import { UsuariosModule } from '../usuarios/usuarios.module';
 
 @Module({
-  imports: [UsuariosModule, TypeOrmModule.forFeature([Contribuyente])],
+  imports: [TypeOrmModule.forFeature([Contribuyente])],
   controllers: [ContribuyentesController],
   providers: [ContribuyentesService],
   exports: [ContribuyentesService],

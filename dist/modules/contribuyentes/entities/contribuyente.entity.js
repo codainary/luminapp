@@ -82,10 +82,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.OneToOne)(() => usuario_entity_1.Usuario, (usuario) => usuario.contribuyente, {
         nullable: true,
-        cascade: true,
-        onDelete: 'CASCADE',
     }),
-    (0, typeorm_1.JoinColumn)({ name: 'id_usuario' }),
     __metadata("design:type", usuario_entity_1.Usuario)
 ], Contribuyente.prototype, "usuario", void 0);
 Contribuyente = __decorate([

@@ -28,6 +28,14 @@ let ContribuyentesController = class ContribuyentesController {
             throw new common_1.InternalServerErrorException();
         }
     }
+    findAll() {
+        try {
+            return this.contribuyentesService.findAll();
+        }
+        catch (error) {
+            throw new common_1.InternalServerErrorException(error);
+        }
+    }
 };
 __decorate([
     (0, common_1.Post)(),
@@ -36,6 +44,12 @@ __decorate([
     __metadata("design:paramtypes", [contribuyentes_dtos_1.CreateContribuyenteDto]),
     __metadata("design:returntype", void 0)
 ], ContribuyentesController.prototype, "create", null);
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], ContribuyentesController.prototype, "findAll", null);
 ContribuyentesController = __decorate([
     (0, common_1.Controller)('contribuyentes'),
     __metadata("design:paramtypes", [contribuyentes_service_1.ContribuyentesService])

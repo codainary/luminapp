@@ -13,6 +13,7 @@ import { UsuariosModule } from './modules/usuarios/usuarios.module';
 import { DatabaseExceptionFilter } from './common/filters/db-exception.filter';
 import { dataSourceOptions } from './database/data-source.config';
 import { ContribuyentesModule } from './modules/contribuyentes/contribuyentes.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { ContribuyentesModule } from './modules/contribuyentes/contribuyentes.mo
     TypeOrmModule.forRoot(dataSourceOptions),
     UsuariosModule,
     ContribuyentesModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [

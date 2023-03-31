@@ -34,15 +34,18 @@ __decorate([
 ], Usuario.prototype, "contrasena", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: 'boolean',
-        default: false,
+        type: 'integer',
+        default: 0,
     }),
-    __metadata("design:type", Boolean)
-], Usuario.prototype, "activo", void 0);
+    __metadata("design:type", Number)
+], Usuario.prototype, "role", void 0);
 __decorate([
     (0, typeorm_1.OneToOne)(() => contribuyente_entity_1.Contribuyente, (contribuyente) => contribuyente.usuario, {
         nullable: true,
+        cascade: true,
+        onDelete: 'CASCADE',
     }),
+    (0, typeorm_1.JoinColumn)({ name: 'id_cntrbynte' }),
     __metadata("design:type", contribuyente_entity_1.Contribuyente)
 ], Usuario.prototype, "contribuyente", void 0);
 Usuario = __decorate([

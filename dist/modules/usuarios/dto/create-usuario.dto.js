@@ -24,8 +24,13 @@ __decorate([
     __metadata("design:type", String)
 ], CreateUsuarioDto.prototype, "contrasena", void 0);
 __decorate([
-    (0, class_validator_1.IsBoolean)(),
-    __metadata("design:type", Boolean)
-], CreateUsuarioDto.prototype, "activo", void 0);
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CreateUsuarioDto.prototype, "role", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsPositive)(),
+    __metadata("design:type", Number)
+], CreateUsuarioDto.prototype, "contribuyenteId", void 0);
 exports.CreateUsuarioDto = CreateUsuarioDto;
 //# sourceMappingURL=create-usuario.dto.js.map

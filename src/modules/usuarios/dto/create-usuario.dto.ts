@@ -1,4 +1,4 @@
-import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString } from 'class-validator';
 
 export class CreateUsuarioDto {
   @IsString()
@@ -9,6 +9,10 @@ export class CreateUsuarioDto {
   @IsNotEmpty()
   readonly contrasena: string;
 
-  @IsBoolean()
-  readonly activo: boolean;
+  @IsNumber()
+  readonly role: number;
+
+  @IsOptional()
+  @IsPositive()
+  readonly contribuyenteId: number;
 }

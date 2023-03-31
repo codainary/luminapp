@@ -1,4 +1,4 @@
-import { Column, Entity, OneToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 
 import { AbstractEntity } from '../../../common/abstract.entity';
 import { Contribuyente } from '../../contribuyentes/entities/contribuyente.entity';
@@ -20,13 +20,16 @@ export class Usuario extends AbstractEntity {
   contrasena: string;
 
   @Column({
-    type: 'boolean',
-    default: false,
+    type: 'integer',
+    default: 0,
   })
-  activo: boolean;
+  role: number;
 
   @OneToOne(() => Contribuyente, (contribuyente) => contribuyente.usuario, {
     nullable: true,
+    cascade: true,
+    onDelete: 'CASCADE',
   })
+  @JoinColumn({ name: 'id_cntrbynte' })
   contribuyente: Contribuyente;
 }

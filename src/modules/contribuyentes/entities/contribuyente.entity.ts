@@ -1,4 +1,4 @@
-import { Column, Entity, OneToOne, JoinColumn } from 'typeorm';
+import { Column, Entity, OneToOne } from 'typeorm';
 
 import { AbstractEntity } from '../../../common/abstract.entity';
 import { Usuario } from '../../usuarios/entities/usuario.entity';
@@ -62,9 +62,6 @@ export class Contribuyente extends AbstractEntity {
 
   @OneToOne(() => Usuario, (usuario) => usuario.contribuyente, {
     nullable: true,
-    cascade: true,
-    onDelete: 'CASCADE',
   })
-  @JoinColumn({ name: 'id_usuario' })
   usuario: Usuario;
 }

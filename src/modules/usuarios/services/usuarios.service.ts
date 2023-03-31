@@ -5,25 +5,32 @@ import { Repository } from 'typeorm';
 import { CreateUsuarioDto } from '../dto/create-usuario.dto';
 import { UpdateUsuarioDto } from '../dto/update-usuario.dto';
 import { Usuario } from '../entities/usuario.entity';
+import { ContribuyentesService } from 'src/modules/contribuyentes/services/contribuyentes.service';
 
 @Injectable()
 export class UsuariosService {
   constructor(
     @InjectRepository(Usuario)
     private readonly usuarioRepo: Repository<Usuario>,
+    private readonly contribuyentesServices: ContribuyentesService,
   ) {}
-  create(payload: CreateUsuarioDto): Promise<Usuario> {
-    const newUsuario = this.usuarioRepo.create(payload);
+
+  async create(data: CreateUsuarioDto): Promise<Usuario> {
+    const newUsuario = this.usuarioRepo.create(data);
+
+    if (data.contribuyenteId) {
+      const contribuyente = await this.contribuyentesServices.findOne(data.contribuyenteId);
+      newUsuario.contribuyente = contribuyente;
+    }
+
     return this.usuarioRepo.save(newUsuario);
   }
 
   findAll(): Promise<Usuario[]> {
-    return this.usuarioRepo.find();
+    return this.usuarioRepo.find({
+      relations: ['contribuyente'],
+    });
   }
-
-  // findOne(id: number): Promise<Usuario> {
-  //   return this.usuarioRepo.findOneBy({ id });
-  // }
 
   async findOne(id: number) {
     const usuario = await this.usuarioRepo.findOneBy({ id });
@@ -43,5 +50,18 @@ export class UsuariosService {
     const usuario = await this.findOne(id);
 
     return this.usuarioRepo.remove(usuario);
+  }
+
+  async findOneByUsername(usuario: string): Promise<Usuario[]> {
+    const findUsuario = await this.usuarioRepo.find({
+      where: {
+        usuario,
+      },
+    });
+
+    if (!findUsuario) {
+      throw new NotFoundException(`Usuario no encontrado`);
+    }
+    return findUsuario;
   }
 }
