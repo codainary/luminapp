@@ -7,7 +7,7 @@ export class CreateUsuarioDto {
 
   @IsString()
   @IsNotEmpty()
-  readonly contrasena: string;
+  contrasena: string;
 
   @IsNumber()
   readonly role: number;
