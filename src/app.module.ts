@@ -14,11 +14,13 @@ import { DatabaseExceptionFilter } from './common/filters/db-exception.filter';
 import { dataSourceOptions } from './database/data-source.config';
 import { ContribuyentesModule } from './modules/contribuyentes/contribuyentes.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { typeOrmConfigAsync } from './database/typeorm.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      cache: true,
       envFilePath: enviroments[process.env.NODE_ENV] || '.dev.env',
       validationSchema: Joi.object({
         DATABASE_NAME: Joi.string().required(),
@@ -28,7 +30,7 @@ import { AuthModule } from './modules/auth/auth.module';
         DATABASE_PORT: Joi.number().required(),
       }),
     }),
-    TypeOrmModule.forRoot(dataSourceOptions),
+    TypeOrmModule.forRootAsync(typeOrmConfigAsync),
     UsuariosModule,
     ContribuyentesModule,
     AuthModule,
