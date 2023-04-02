@@ -34,7 +34,6 @@ export const typeOrmModuleOptions = (configService: ConfigService = new ConfigSe
   password: configService.get<string>('DATABASE_PASSWORD'),
   database: configService.get<string>('DATABASE_NAME'),
   entities: ['dist/**/*.entity.js'],
-  ssl: false,
 });
 
 export const typeOrmConfigAsync: TypeOrmModuleAsyncOptions = {

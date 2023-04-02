@@ -11,7 +11,6 @@ import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { enviroments } from './config/enviroments';
 import { UsuariosModule } from './modules/usuarios/usuarios.module';
 import { DatabaseExceptionFilter } from './common/filters/db-exception.filter';
-import { dataSourceOptions } from './database/data-source.config';
 import { ContribuyentesModule } from './modules/contribuyentes/contribuyentes.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { typeOrmConfigAsync } from './database/typeorm.config';
