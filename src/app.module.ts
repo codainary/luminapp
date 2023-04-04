@@ -11,18 +11,21 @@ import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { enviroments } from './config/enviroments';
 import { UsuariosModule } from './modules/usuarios/usuarios.module';
 import { DatabaseExceptionFilter } from './common/filters/db-exception.filter';
-import { dataSourceOptions } from './database/data-source.config';
+import { TypeOrmConfigService } from './database/typeorm.config';
 import { ContribuyentesModule } from './modules/contribuyentes/contribuyentes.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { SolicitudesModule } from './modules/solicitudes/solicitudes.module';
-import configuration from './config/configuration';
+import config from './config/configuration';
+import { validate } from './config/env.validation';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       ignoreEnvFile: process.env.NODE_ENV !== 'production' ? false : true,
-      load: [configuration],
+      load: [config],
+      cache: true,
+      validate,
       envFilePath: enviroments[process.env.NODE_ENV] || '.dev.env',
       validationSchema: Joi.object({
         DATABASE_NAME: Joi.string().required(),
@@ -33,7 +36,9 @@ import configuration from './config/configuration';
         SOLICITUDES_CONSECUTIVO: Joi.number().required(),
       }),
     }),
-    TypeOrmModule.forRoot(dataSourceOptions),
+    TypeOrmModule.forRootAsync({
+      useClass: TypeOrmConfigService,
+    }),
     UsuariosModule,
     ContribuyentesModule,
     AuthModule,
@@ -50,6 +55,7 @@ import configuration from './config/configuration';
       provide: APP_FILTER,
       useClass: DatabaseExceptionFilter,
     },
+    TypeOrmConfigService,
   ],
 })
 export class AppModule implements NestModule {

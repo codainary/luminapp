@@ -12,24 +12,32 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppService = void 0;
+exports.TypeOrmConfigService = void 0;
 const common_1 = require("@nestjs/common");
-const configuration_1 = require("./config/configuration");
-let AppService = class AppService {
+const configuration_1 = require("../config/configuration");
+let TypeOrmConfigService = class TypeOrmConfigService {
     constructor(configEnv) {
         this.configEnv = configEnv;
     }
-    getHello() {
-        const dbHost = this.configEnv.database.host;
-        const dbName = this.configEnv.database.name;
-        const soli = this.configEnv.soliConsecutivo;
-        return `<h1>Hello World!</h1> ${dbHost + ' --- ' + dbName + ' --- ' + soli}`;
+    createTypeOrmOptions() {
+        return {
+            type: 'postgres',
+            host: this.configEnv.database.host,
+            port: this.configEnv.database.port,
+            username: this.configEnv.database.username,
+            password: this.configEnv.database.password,
+            database: this.configEnv.database.name,
+            entities: ['dist/**/*.entity.js'],
+            logging: true,
+            autoLoadEntities: true,
+            synchronize: true,
+        };
     }
 };
-AppService = __decorate([
+TypeOrmConfigService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, common_1.Inject)(configuration_1.default.KEY)),
     __metadata("design:paramtypes", [void 0])
-], AppService);
-exports.AppService = AppService;
-//# sourceMappingURL=app.service.js.map
+], TypeOrmConfigService);
+exports.TypeOrmConfigService = TypeOrmConfigService;
+//# sourceMappingURL=typeorm.config.js.map

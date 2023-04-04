@@ -13,13 +13,16 @@ const common_1 = require("@nestjs/common");
 const core_1 = require("@nestjs/core");
 const app_module_1 = require("./app.module");
 const http_exception_filter_1 = require("./common/filters/http-exception.filter");
+const config_1 = require("@nestjs/config");
 function bootstrap() {
     return __awaiter(this, void 0, void 0, function* () {
         const app = yield core_1.NestFactory.create(app_module_1.AppModule);
+        const configService = app.get(config_1.ConfigService);
+        const port = configService.get('PORT');
         app.setGlobalPrefix('v1');
         app.useGlobalFilters(new http_exception_filter_1.HttpExceptionFilter());
         app.useGlobalPipes(new common_1.ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }));
-        yield app.listen(3000);
+        yield app.listen(port);
     });
 }
 bootstrap();
