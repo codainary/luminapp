@@ -14,11 +14,15 @@ import { DatabaseExceptionFilter } from './common/filters/db-exception.filter';
 import { dataSourceOptions } from './database/data-source.config';
 import { ContribuyentesModule } from './modules/contribuyentes/contribuyentes.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { SolicitudesModule } from './modules/solicitudes/solicitudes.module';
+import configuration from './config/configuration';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      ignoreEnvFile: process.env.NODE_ENV !== 'production' ? false : true,
+      load: [configuration],
       envFilePath: enviroments[process.env.NODE_ENV] || '.dev.env',
       validationSchema: Joi.object({
         DATABASE_NAME: Joi.string().required(),
@@ -26,12 +30,14 @@ import { AuthModule } from './modules/auth/auth.module';
         DATABASE_PASSWORD: Joi.string().required(),
         DATABASE_HOST: Joi.string().required(),
         DATABASE_PORT: Joi.number().required(),
+        SOLICITUDES_CONSECUTIVO: Joi.number().required(),
       }),
     }),
     TypeOrmModule.forRoot(dataSourceOptions),
     UsuariosModule,
     ContribuyentesModule,
     AuthModule,
+    SolicitudesModule,
   ],
   controllers: [AppController],
   providers: [

@@ -17,7 +17,8 @@ let AppService = class AppService {
         this.configService = configService;
     }
     getHello() {
-        return `<h1>Hello World!</h1>`;
+        const dbHost = this.configService.get('database.port');
+        return `<h1>Hello World!</h1> ${dbHost}`;
     }
 };
 AppService = __decorate([

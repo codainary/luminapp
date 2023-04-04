@@ -22,6 +22,8 @@ const db_exception_filter_1 = require("./common/filters/db-exception.filter");
 const data_source_config_1 = require("./database/data-source.config");
 const contribuyentes_module_1 = require("./modules/contribuyentes/contribuyentes.module");
 const auth_module_1 = require("./modules/auth/auth.module");
+const solicitudes_module_1 = require("./modules/solicitudes/solicitudes.module");
+const configuration_1 = require("./config/configuration");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer.apply(logger_middleware_1.LoggerMiddleware).forRoutes('*');
@@ -32,6 +34,8 @@ AppModule = __decorate([
         imports: [
             config_1.ConfigModule.forRoot({
                 isGlobal: true,
+                ignoreEnvFile: process.env.NODE_ENV !== 'production' ? false : true,
+                load: [configuration_1.default],
                 envFilePath: enviroments_1.enviroments[process.env.NODE_ENV] || '.dev.env',
                 validationSchema: Joi.object({
                     DATABASE_NAME: Joi.string().required(),
@@ -39,12 +43,14 @@ AppModule = __decorate([
                     DATABASE_PASSWORD: Joi.string().required(),
                     DATABASE_HOST: Joi.string().required(),
                     DATABASE_PORT: Joi.number().required(),
+                    SOLICITUDES_CONSECUTIVO: Joi.number().required(),
                 }),
             }),
             typeorm_1.TypeOrmModule.forRoot(data_source_config_1.dataSourceOptions),
             usuarios_module_1.UsuariosModule,
             contribuyentes_module_1.ContribuyentesModule,
             auth_module_1.AuthModule,
+            solicitudes_module_1.SolicitudesModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [
