@@ -30,17 +30,17 @@ export class Solicitud extends AbstractEntity {
     this.nroSolicitud = `${base + ultimaSecuencia + 1}`.padStart(10, '0');
   }
 
-  // @Column({
-  //   name: 'direccion_falla',
-  // })
-  // direccionFalla: string;
+  @Column({
+    name: 'direccion_falla',
+  })
+  direccionFalla: string;
 
-  // @Column({
-  //   length: 20,
-  //   name: 'telefono_contacto',
-  //   nullable: false,
-  // })
-  // telefonoContacto: string;
+  @Column({
+    length: 20,
+    name: 'telefono_contacto',
+    nullable: false,
+  })
+  telefonoContacto: string;
 
   @Column({
     nullable: false,

@@ -5,6 +5,8 @@ export declare class Solicitud extends AbstractEntity {
     constructor(solicitudRepo: Repository<Solicitud>);
     nroSolicitud: string;
     generarCodigo(): Promise<void>;
+    direccionFalla: string;
+    telefonoContacto: string;
     observacion: string;
     respuesta: string;
     correoRespuesta: string;

@@ -59,6 +59,20 @@ __decorate([
 ], Solicitud.prototype, "generarCodigo", null);
 __decorate([
     (0, typeorm_1.Column)({
+        name: 'direccion_falla',
+    }),
+    __metadata("design:type", String)
+], Solicitud.prototype, "direccionFalla", void 0);
+__decorate([
+    (0, typeorm_1.Column)({
+        length: 20,
+        name: 'telefono_contacto',
+        nullable: false,
+    }),
+    __metadata("design:type", String)
+], Solicitud.prototype, "telefonoContacto", void 0);
+__decorate([
+    (0, typeorm_1.Column)({
         nullable: false,
     }),
     __metadata("design:type", String)
