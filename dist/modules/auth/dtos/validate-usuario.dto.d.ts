@@ -1,6 +1,6 @@
 import { Contribuyente } from 'src/modules/contribuyentes/entities/contribuyente.entity';
 export declare class ValidateUsuarioDto {
-    readonly role: number;
+    readonly rol: number;
     readonly contribuyente: Contribuyente;
     readonly id: number;
     readonly fechaCreacion: Date;

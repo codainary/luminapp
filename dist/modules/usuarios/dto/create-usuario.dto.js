@@ -25,8 +25,9 @@ __decorate([
 ], CreateUsuarioDto.prototype, "contrasena", void 0);
 __decorate([
     (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Number)
-], CreateUsuarioDto.prototype, "role", void 0);
+], CreateUsuarioDto.prototype, "rol", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsPositive)(),

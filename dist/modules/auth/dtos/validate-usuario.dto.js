@@ -18,7 +18,7 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
-], ValidateUsuarioDto.prototype, "role", void 0);
+], ValidateUsuarioDto.prototype, "rol", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", contribuyente_entity_1.Contribuyente)

@@ -3,6 +3,6 @@ import { Contribuyente } from '../../contribuyentes/entities/contribuyente.entit
 export declare class Usuario extends AbstractEntity {
     usuario: string;
     contrasena: string;
-    role: number;
+    rol: number;
     contribuyente: Contribuyente;
 }

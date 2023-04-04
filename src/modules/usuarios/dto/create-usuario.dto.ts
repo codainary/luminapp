@@ -10,7 +10,8 @@ export class CreateUsuarioDto {
   contrasena: string;
 
   @IsNumber()
-  readonly role: number;
+  @IsNotEmpty()
+  readonly rol: number;
 
   @IsOptional()
   @IsPositive()

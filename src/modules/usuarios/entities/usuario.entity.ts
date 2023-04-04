@@ -22,8 +22,9 @@ export class Usuario extends AbstractEntity {
   @Column({
     type: 'integer',
     default: 0,
+    nullable: false,
   })
-  role: number;
+  rol: number;
 
   @OneToOne(() => Contribuyente, (contribuyente) => contribuyente.usuario, {
     nullable: true,
