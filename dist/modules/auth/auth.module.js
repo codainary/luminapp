@@ -11,13 +11,16 @@ const usuarios_module_1 = require("./../usuarios/usuarios.module");
 const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./services/auth.service");
 const auth_controller_1 = require("./controllers/auth.controller");
+const passport_1 = require("@nestjs/passport");
+const local_strategy_1 = require("./strategies/local.strategy");
+const session_serializer_1 = require("../../common/session.serializer");
 let AuthModule = class AuthModule {
 };
 AuthModule = __decorate([
     (0, common_1.Module)({
-        imports: [usuarios_module_1.UsuariosModule],
+        imports: [usuarios_module_1.UsuariosModule, passport_1.PassportModule.register({ session: true })],
         controllers: [auth_controller_1.AuthController],
-        providers: [auth_service_1.AuthService],
+        providers: [auth_service_1.AuthService, local_strategy_1.LocalStrategy, session_serializer_1.SessionSerializer],
     })
 ], AuthModule);
 exports.AuthModule = AuthModule;

@@ -81,6 +81,19 @@ let UsuariosService = class UsuariosService {
             return findUsuario;
         });
     }
+    findOneById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const findUsuario = yield this.usuarioRepo.find({
+                where: {
+                    id,
+                },
+            });
+            if (!findUsuario) {
+                throw new common_1.NotFoundException(`Usuario ${id} no encontrado`);
+            }
+            return findUsuario;
+        });
+    }
 };
 UsuariosService = __decorate([
     (0, common_1.Injectable)(),

@@ -13,4 +13,5 @@ export declare class UsuariosService {
     update(id: number, changes: UpdateUsuarioDto): Promise<Usuario>;
     remove(id: number): Promise<Usuario>;
     findOneByUsername(usuario: string): Promise<Usuario[]>;
+    findOneById(id: number): Promise<Usuario[]>;
 }

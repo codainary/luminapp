@@ -64,4 +64,17 @@ export class UsuariosService {
     }
     return findUsuario;
   }
+
+  async findOneById(id: number): Promise<Usuario[]> {
+    const findUsuario = await this.usuarioRepo.find({
+      where: {
+        id,
+      },
+    });
+
+    if (!findUsuario) {
+      throw new NotFoundException(`Usuario ${id} no encontrado`);
+    }
+    return findUsuario;
+  }
 }

@@ -9,6 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const session = require("express-session");
+const passport = require("passport");
 const common_1 = require("@nestjs/common");
 const core_1 = require("@nestjs/core");
 const app_module_1 = require("./app.module");
@@ -19,6 +21,15 @@ function bootstrap() {
         const app = yield core_1.NestFactory.create(app_module_1.AppModule);
         const configService = app.get(config_1.ConfigService);
         const port = configService.get('PORT');
+        const secretSessionKey = configService.get('SECRET_SESSION_KEY');
+        app.use(session({
+            secret: secretSessionKey,
+            resave: false,
+            saveUninitialized: false,
+            cookie: { maxAge: 3600000 },
+        }));
+        app.use(passport.initialize());
+        app.use(passport.session());
         app.setGlobalPrefix('v1');
         app.useGlobalFilters(new http_exception_filter_1.HttpExceptionFilter());
         app.useGlobalPipes(new common_1.ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }));
