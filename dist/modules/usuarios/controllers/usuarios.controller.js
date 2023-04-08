@@ -17,7 +17,6 @@ const common_1 = require("@nestjs/common");
 const usuarios_service_1 = require("../services/usuarios.service");
 const create_usuario_dto_1 = require("../dto/create-usuario.dto");
 const update_usuario_dto_1 = require("../dto/update-usuario.dto");
-const auth_guard_1 = require("../../../common/guards/auth.guard");
 let UsuariosController = class UsuariosController {
     constructor(usuariosService) {
         this.usuariosService = usuariosService;
@@ -56,7 +55,6 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UsuariosController.prototype, "create", null);
 __decorate([
-    (0, common_1.UseGuards)(auth_guard_1.AuthenticateGuard),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),

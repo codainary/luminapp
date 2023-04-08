@@ -34,7 +34,6 @@ import { validate } from './config/env.validation';
         DATABASE_HOST: Joi.string().required(),
         DATABASE_PORT: Joi.number().required(),
         SOLICITUDES_CONSECUTIVO: Joi.number().required(),
-        EXPRESS_SESSION: Joi.string().required(),
       }),
     }),
     TypeOrmModule.forRootAsync({

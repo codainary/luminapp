@@ -28,7 +28,6 @@ export class UsuariosController {
     }
   }
 
-  @UseGuards(AuthenticateGuard) // Is Authenticated?
   @Get()
   findAll() {
     try {
