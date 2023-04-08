@@ -21,7 +21,7 @@ let AuthController = class AuthController {
         this.authService = authService;
     }
     login(req) {
-        return req.user;
+        return { msg: 'Logged In!' };
     }
 };
 __decorate([

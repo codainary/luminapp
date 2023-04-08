@@ -26,7 +26,7 @@ function bootstrap() {
             secret: secretSessionKey,
             resave: false,
             saveUninitialized: false,
-            cookie: { maxAge: 3600000 },
+            cookie: { maxAge: 60000 },
         }));
         app.use(passport.initialize());
         app.use(passport.session());
