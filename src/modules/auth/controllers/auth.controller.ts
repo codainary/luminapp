@@ -9,7 +9,7 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  login(@Request() req: any) {
+  login() {
     return { msg: 'Logged In!' };
   }
 }
