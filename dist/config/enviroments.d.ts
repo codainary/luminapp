@@ -1,5 +1,5 @@
 export declare const enviroments: {
-    dev: string;
-    stag: string;
-    prod: string;
+    development: string;
+    test: string;
+    production: string;
 };
