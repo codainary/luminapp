@@ -1,6 +1,7 @@
-import { ConfigService } from '@nestjs/config';
+import { ConfigType } from '@nestjs/config';
+import config from './config/configuration';
 export declare class AppService {
-    private configService;
-    constructor(configService: ConfigService);
+    private configEnv;
+    constructor(configEnv: ConfigType<typeof config>);
     getHello(): string;
 }

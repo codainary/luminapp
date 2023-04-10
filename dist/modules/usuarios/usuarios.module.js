@@ -13,13 +13,14 @@ const usuarios_service_1 = require("./services/usuarios.service");
 const usuarios_controller_1 = require("./controllers/usuarios.controller");
 const usuario_entity_1 = require("./entities/usuario.entity");
 const contribuyentes_module_1 = require("../contribuyentes/contribuyentes.module");
+const auth_guard_1 = require("../../common/guards/auth.guard");
 let UsuariosModule = class UsuariosModule {
 };
 UsuariosModule = __decorate([
     (0, common_1.Module)({
         imports: [contribuyentes_module_1.ContribuyentesModule, typeorm_1.TypeOrmModule.forFeature([usuario_entity_1.Usuario])],
         controllers: [usuarios_controller_1.UsuariosController],
-        providers: [usuarios_service_1.UsuariosService],
+        providers: [usuarios_service_1.UsuariosService, auth_guard_1.AuthenticateGuard],
         exports: [usuarios_service_1.UsuariosService],
     })
 ], UsuariosModule);

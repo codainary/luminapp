@@ -8,21 +8,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppService = void 0;
 const common_1 = require("@nestjs/common");
-const config_1 = require("@nestjs/config");
+const configuration_1 = require("./config/configuration");
 let AppService = class AppService {
-    constructor(configService) {
-        this.configService = configService;
+    constructor(configEnv) {
+        this.configEnv = configEnv;
     }
     getHello() {
-        return `<h1>Hello World!</h1>`;
+        const dbHost = this.configEnv.database.host;
+        const dbName = this.configEnv.database.name;
+        const soli = this.configEnv.soliConsecutivo;
+        return `<h1>Hello World!</h1> ${dbHost + ' --- ' + dbName + ' --- ' + soli}`;
     }
 };
 AppService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [config_1.ConfigService])
+    __param(0, (0, common_1.Inject)(configuration_1.default.KEY)),
+    __metadata("design:paramtypes", [void 0])
 ], AppService);
 exports.AppService = AppService;
 //# sourceMappingURL=app.service.js.map

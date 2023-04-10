@@ -11,15 +11,21 @@ import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { enviroments } from './config/enviroments';
 import { UsuariosModule } from './modules/usuarios/usuarios.module';
 import { DatabaseExceptionFilter } from './common/filters/db-exception.filter';
+import { TypeOrmConfigService } from './database/typeorm.config';
 import { ContribuyentesModule } from './modules/contribuyentes/contribuyentes.module';
 import { AuthModule } from './modules/auth/auth.module';
-import { typeOrmConfigAsync } from './database/typeorm.config';
+import { SolicitudesModule } from './modules/solicitudes/solicitudes.module';
+import config from './config/configuration';
+import { validate } from './config/env.validation';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       cache: true,
+      ignoreEnvFile: process.env.NODE_ENV !== 'production' ? false : true,
+      load: [config],
+      validate,
       envFilePath: enviroments[process.env.NODE_ENV] || '.dev.env',
       validationSchema: Joi.object({
         DATABASE_NAME: Joi.string().required(),
@@ -27,12 +33,16 @@ import { typeOrmConfigAsync } from './database/typeorm.config';
         DATABASE_PASSWORD: Joi.string().required(),
         DATABASE_HOST: Joi.string().required(),
         DATABASE_PORT: Joi.number().required(),
+        SOLICITUDES_CONSECUTIVO: Joi.number().required(),
       }),
     }),
-    TypeOrmModule.forRootAsync(typeOrmConfigAsync),
+    TypeOrmModule.forRootAsync({
+      useClass: TypeOrmConfigService,
+    }),
     UsuariosModule,
     ContribuyentesModule,
     AuthModule,
+    SolicitudesModule,
   ],
   controllers: [AppController],
   providers: [
@@ -45,6 +55,7 @@ import { typeOrmConfigAsync } from './database/typeorm.config';
       provide: APP_FILTER,
       useClass: DatabaseExceptionFilter,
     },
+    TypeOrmConfigService,
   ],
 })
 export class AppModule implements NestModule {

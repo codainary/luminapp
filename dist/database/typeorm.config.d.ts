@@ -1,7 +1,8 @@
-import { ConfigService } from '@nestjs/config';
-import { TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
-import { DataSource, DataSourceOptions } from 'typeorm';
-export declare const typeOrmModuleOptions: (configService?: ConfigService) => DataSourceOptions;
-export declare const typeOrmConfigAsync: TypeOrmModuleAsyncOptions;
-declare const _default: DataSource;
-export default _default;
+import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
+import { ConfigType } from '@nestjs/config';
+import config from '../config/configuration';
+export declare class TypeOrmConfigService implements TypeOrmOptionsFactory {
+    private configEnv;
+    constructor(configEnv: ConfigType<typeof config>);
+    createTypeOrmOptions(): TypeOrmModuleOptions;
+}

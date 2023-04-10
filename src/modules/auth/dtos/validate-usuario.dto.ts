@@ -4,7 +4,7 @@ import { Contribuyente } from 'src/modules/contribuyentes/entities/contribuyente
 export class ValidateUsuarioDto {
   @IsNotEmpty()
   @IsNumber()
-  readonly role: number;
+  readonly rol: number;
 
   @IsNotEmpty()
   readonly contribuyente: Contribuyente;

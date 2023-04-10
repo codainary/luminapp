@@ -1,8 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, InternalServerErrorException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  InternalServerErrorException,
+  UseGuards,
+} from '@nestjs/common';
 
 import { UsuariosService } from '../services/usuarios.service';
 import { CreateUsuarioDto } from '../dto/create-usuario.dto';
 import { UpdateUsuarioDto } from '../dto/update-usuario.dto';
+import { AuthenticateGuard } from '../../../common/guards/auth.guard';
 
 @Controller('usuarios')
 export class UsuariosController {

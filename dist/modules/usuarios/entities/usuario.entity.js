@@ -36,9 +36,10 @@ __decorate([
     (0, typeorm_1.Column)({
         type: 'integer',
         default: 0,
+        nullable: false,
     }),
     __metadata("design:type", Number)
-], Usuario.prototype, "role", void 0);
+], Usuario.prototype, "rol", void 0);
 __decorate([
     (0, typeorm_1.OneToOne)(() => contribuyente_entity_1.Contribuyente, (contribuyente) => contribuyente.usuario, {
         nullable: true,
