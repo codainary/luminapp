@@ -1,27 +1,14 @@
-# version: 1.0.0
+version: 1.0.0
 
-# services:
-#   postgres:
-#     image: postgres:14
-#     environment:
-#       - POSTGRES_DB='test'
-#       - POSTGRES_USER='root'
-#       - POSTGRES_PASSWORD='fsaFafnaskfjnsajkfnasjfsafsaf7as8fasf87as87'
-#     ports:
-#       - '5432:5432'
-#     volumes:
-#       - ./postgres_data:/var/lib/postgresql/data
-version: '3.9'
 services:
-  db:
-    image: postgres
+  postgres:
+    image: postgres:14
     environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
-      POSTGRES_DB: test
+      - POSTGRES_DB='test'
+      - POSTGRES_USER='root'
+      - POSTGRES_PASSWORD='fsaFafnaskfjnsajkfnasjfsafsaf7as8fasf87as87'
     ports:
-      - "5432:5432"
+      - '5432:5432'
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
-      - ./pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf
 
