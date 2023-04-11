@@ -11,52 +11,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var Solicitud_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Solicitud = void 0;
 const typeorm_1 = require("typeorm");
-const abstract_entity_1 = require("../../../common/abstract.entity");
+const common_1 = require("@nestjs/common");
 const typeorm_2 = require("@nestjs/typeorm");
+const abstract_entity_1 = require("../../../common/abstract.entity");
+const configuration_1 = require("../../../config/configuration");
 let Solicitud = Solicitud_1 = class Solicitud extends abstract_entity_1.AbstractEntity {
-    constructor(solicitudRepo) {
+    constructor(solicitudRepo, configEnv) {
         super();
         this.solicitudRepo = solicitudRepo;
-    }
-    generarCodigo() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const base = process.env.SOLICITUDES_CONSECUTIVO;
-            const ultimoNroSolicitud = yield this.solicitudRepo.find();
-            let ultimaSecuencia;
-            if (!ultimoNroSolicitud) {
-                ultimaSecuencia = base;
-            }
-            ultimaSecuencia = ultimoNroSolicitud ? parseInt(ultimoNroSolicitud[0].nroSolicitud.slice(-9)) : 0;
-            this.nroSolicitud = `${base + ultimaSecuencia + 1}`.padStart(10, '0');
-        });
+        this.configEnv = configEnv;
     }
 };
-__decorate([
-    (0, typeorm_1.Column)({
-        name: 'nro_solicitud',
-        unique: true,
-    }),
-    __metadata("design:type", String)
-], Solicitud.prototype, "nroSolicitud", void 0);
-__decorate([
-    (0, typeorm_1.BeforeInsert)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], Solicitud.prototype, "generarCodigo", null);
 __decorate([
     (0, typeorm_1.Column)({
         name: 'direccion_falla',
@@ -78,7 +47,9 @@ __decorate([
     __metadata("design:type", String)
 ], Solicitud.prototype, "observacion", void 0);
 __decorate([
-    (0, typeorm_1.Column)({}),
+    (0, typeorm_1.Column)({
+        nullable: true,
+    }),
     __metadata("design:type", String)
 ], Solicitud.prototype, "respuesta", void 0);
 __decorate([
@@ -99,7 +70,8 @@ __decorate([
 Solicitud = Solicitud_1 = __decorate([
     (0, typeorm_1.Entity)({ name: 'solicitudes' }),
     __param(0, (0, typeorm_2.InjectRepository)(Solicitud_1)),
-    __metadata("design:paramtypes", [typeorm_1.Repository])
+    __param(1, (0, common_1.Inject)(configuration_1.default.KEY)),
+    __metadata("design:paramtypes", [typeorm_1.Repository, void 0])
 ], Solicitud);
 exports.Solicitud = Solicitud;
 //# sourceMappingURL=solicitud.entity.js.map

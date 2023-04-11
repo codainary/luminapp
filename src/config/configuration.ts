@@ -1,7 +1,7 @@
 import { registerAs } from '@nestjs/config';
 
 export default registerAs('config', () => ({
-  soliConsecutivo: process.env.SOLICITUDES_CONSECUTIVO,
+  consecutivo: process.env.SOLICITUDES_CONSECUTIVO,
   database: {
     host: process.env.DATABASE_HOST,
     port: parseInt(process.env.DATABASE_PORT, 10) || 5432,

@@ -1,5 +1,5 @@
 declare const _default: (() => {
-    soliConsecutivo: string;
+    consecutivo: string;
     database: {
         host: string;
         port: number;
@@ -8,7 +8,7 @@ declare const _default: (() => {
         name: string;
     };
 }) & import("@nestjs/config").ConfigFactoryKeyHost<{
-    soliConsecutivo: string;
+    consecutivo: string;
     database: {
         host: string;
         port: number;

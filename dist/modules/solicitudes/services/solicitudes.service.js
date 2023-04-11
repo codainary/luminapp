@@ -37,7 +37,8 @@ let SolicitudesService = class SolicitudesService {
         });
     }
     findAll() {
-        return this.solicitudRepo.find({ order: { id: 'DESC' } });
+        const rta = this.solicitudRepo.find({ order: { id: 'DESC' } });
+        return rta;
     }
 };
 SolicitudesService = __decorate([

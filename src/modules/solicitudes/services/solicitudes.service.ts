@@ -23,7 +23,8 @@ export class SolicitudesService {
   }
 
   findAll(): Promise<Solicitud[]> {
-    return this.solicitudRepo.find({ order: { id: 'DESC' } });
+    const rta = this.solicitudRepo.find({ order: { id: 'DESC' } });
+    return rta;
   }
 
   // async findOne(id: number) {

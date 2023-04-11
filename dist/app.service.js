@@ -22,7 +22,7 @@ let AppService = class AppService {
     getHello() {
         const dbHost = this.configEnv.database.host;
         const dbName = this.configEnv.database.name;
-        const soli = this.configEnv.soliConsecutivo;
+        const soli = this.configEnv.consecutivo;
         return `<h1>Hello World!</h1> ${dbHost + ' --- ' + dbName + ' --- ' + soli}`;
     }
 };
