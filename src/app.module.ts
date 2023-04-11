@@ -17,6 +17,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { SolicitudesModule } from './modules/solicitudes/solicitudes.module';
 import config from './config/configuration';
 import { validate } from './config/env.validation';
+import { CobrosModule } from './modules/cobros/cobros.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { validate } from './config/env.validation';
     ContribuyentesModule,
     AuthModule,
     SolicitudesModule,
+    CobrosModule,
   ],
   controllers: [AppController],
   providers: [
