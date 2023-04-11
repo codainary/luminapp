@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+
 import { CobrosService } from '../services/cobros.service';
-import { CreateCobroDto } from '../dtos/cobros.dtos';
-import { UpdateCobroDto } from './dtos/update-cobro.dto';
+import { CreateCobroDto, UpdateCobroDto } from '../dtos/cobros.dtos';
 
 @Controller('cobros')
 export class CobrosController {

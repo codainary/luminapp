@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCobroDto } from '../dtos/cobros.dtos';
-import { UpdateCobroDto } from './dtos/update-cobro.dto';
+import { CreateCobroDto, UpdateCobroDto } from '../dtos/cobros.dtos';
 
 @Injectable()
 export class CobrosService {
