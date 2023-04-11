@@ -27,6 +27,16 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({
         type: 'character varying',
+        name: 'identificacion_tipo',
+        length: 20,
+        nullable: false,
+        unique: true,
+    }),
+    __metadata("design:type", String)
+], Contribuyente.prototype, "identificacionTipo", void 0);
+__decorate([
+    (0, typeorm_1.Column)({
+        type: 'character varying',
         length: 15,
         name: 'primer_nombre',
         nullable: false,
@@ -70,6 +80,7 @@ __decorate([
     (0, typeorm_1.Column)({
         type: 'character varying',
         nullable: false,
+        unique: true,
     }),
     __metadata("design:type", String)
 ], Contribuyente.prototype, "correo", void 0);

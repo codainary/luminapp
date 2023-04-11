@@ -14,6 +14,15 @@ export class Contribuyente extends AbstractEntity {
 
   @Column({
     type: 'character varying',
+    name: 'identificacion_tipo',
+    length: 20,
+    nullable: false,
+    unique: true,
+  })
+  identificacionTipo: string;
+
+  @Column({
+    type: 'character varying',
     length: 15,
     name: 'primer_nombre',
     nullable: false,
@@ -52,6 +61,7 @@ export class Contribuyente extends AbstractEntity {
   @Column({
     type: 'character varying',
     nullable: false,
+    unique: true,
   })
   correo: string;
 

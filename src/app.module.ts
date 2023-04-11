@@ -18,6 +18,8 @@ import { SolicitudesModule } from './modules/solicitudes/solicitudes.module';
 import config from './config/configuration';
 import { validate } from './config/env.validation';
 import { CobrosModule } from './modules/cobros/cobros.module';
+import { DeudasModule } from './modules/deudas/deudas.module';
+import { PagosModule } from './modules/pagos/pagos.module';
 
 @Module({
   imports: [
@@ -45,6 +47,8 @@ import { CobrosModule } from './modules/cobros/cobros.module';
     AuthModule,
     SolicitudesModule,
     CobrosModule,
+    DeudasModule,
+    PagosModule,
   ],
   controllers: [AppController],
   providers: [

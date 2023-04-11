@@ -12,9 +12,9 @@ export class Cobro extends AbstractEntity {
   })
   consecutivo: string;
 
-  //TODO: FK ID UNIDAD
+  //TODO: FK ID UNIDAD (MANY TO ONE)
 
-  //TODO: FK ID CONTRIBUYENTE
+  //TODO: FK ID CONTRIBUYENTE (MANY TO ONE)
 
   @Column({
     type: 'character varying',
