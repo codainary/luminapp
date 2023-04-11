@@ -20,6 +20,7 @@ import { validate } from './config/env.validation';
 import { CobrosModule } from './modules/cobros/cobros.module';
 import { DeudasModule } from './modules/deudas/deudas.module';
 import { PagosModule } from './modules/pagos/pagos.module';
+import { UnidadesModule } from './modules/unidades/unidades.module';
 
 @Module({
   imports: [
@@ -49,6 +50,7 @@ import { PagosModule } from './modules/pagos/pagos.module';
     CobrosModule,
     DeudasModule,
     PagosModule,
+    UnidadesModule,
   ],
   controllers: [AppController],
   providers: [

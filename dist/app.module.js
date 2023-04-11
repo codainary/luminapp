@@ -26,6 +26,9 @@ const solicitudes_module_1 = require("./modules/solicitudes/solicitudes.module")
 const configuration_1 = require("./config/configuration");
 const env_validation_1 = require("./config/env.validation");
 const cobros_module_1 = require("./modules/cobros/cobros.module");
+const deudas_module_1 = require("./modules/deudas/deudas.module");
+const pagos_module_1 = require("./modules/pagos/pagos.module");
+const unidades_module_1 = require("./modules/unidades/unidades.module");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer.apply(logger_middleware_1.LoggerMiddleware).forRoutes('*');
@@ -58,6 +61,9 @@ AppModule = __decorate([
             auth_module_1.AuthModule,
             solicitudes_module_1.SolicitudesModule,
             cobros_module_1.CobrosModule,
+            deudas_module_1.DeudasModule,
+            pagos_module_1.PagosModule,
+            unidades_module_1.UnidadesModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [
