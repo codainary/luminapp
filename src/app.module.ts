@@ -38,6 +38,7 @@ import { UnidadesModule } from './modules/unidades/unidades.module';
         DATABASE_HOST: Joi.string().required(),
         DATABASE_PORT: Joi.number().required(),
         SOLICITUDES_CONSECUTIVO: Joi.number().required(),
+        JWT_SECRET_KEY: Joi.string().required(),
       }),
     }),
     TypeOrmModule.forRootAsync({

@@ -51,6 +51,7 @@ AppModule = __decorate([
                     DATABASE_HOST: Joi.string().required(),
                     DATABASE_PORT: Joi.number().required(),
                     SOLICITUDES_CONSECUTIVO: Joi.number().required(),
+                    JWT_SECRET_KEY: Joi.string().required(),
                 }),
             }),
             typeorm_1.TypeOrmModule.forRootAsync({

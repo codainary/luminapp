@@ -31,10 +31,12 @@ var __rest = (this && this.__rest) || function (s, e) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
+const jwt_1 = require("@nestjs/jwt");
 const usuarios_service_1 = require("../../usuarios/services/usuarios.service");
 let AuthService = class AuthService {
-    constructor(usuariosServices) {
+    constructor(usuariosServices, jwtService) {
         this.usuariosServices = usuariosServices;
+        this.jwtService = jwtService;
     }
     validateUsuario(usuario, contrasena) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -48,10 +50,18 @@ let AuthService = class AuthService {
             return null;
         });
     }
+    login(username) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const payload = { sub: username.id };
+            return {
+                access_token: this.jwtService.sign(payload),
+            };
+        });
+    }
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [usuarios_service_1.UsuariosService])
+    __metadata("design:paramtypes", [usuarios_service_1.UsuariosService, jwt_1.JwtService])
 ], AuthService);
 exports.AuthService = AuthService;
 //# sourceMappingURL=auth.service.js.map
